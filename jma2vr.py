@@ -16,7 +16,7 @@ from websockets.exceptions import ConnectionClosed
 VR_URL = "http://127.0.0.1:4532/talk"
 WS_URL = "wss://ws-api.wolfx.jp/jma_eew"
 
-USER_AGENT = "jma2vr/2.0"
+USER_AGENT = "jma2vr/2.1"
 
 # WebSocket 断线后等待多久重连
 RECONNECT_DELAY = 3
@@ -149,7 +149,7 @@ def build_voice_text(data):
         return "緊急地震速報は取り消されました。"
 
     hypocenter = data.get("Hypocenter", "不明")
-    magnitude = data.get("Magunitude", "不明")
+    magnitude = data.get("Magnitude", "不明")
     max_intensity = data.get("MaxIntensity", "不明")
 
     return (
@@ -309,7 +309,7 @@ async def process_eew(data):
             f"EventID={event_id}, "
             f"Serial={serial}, "
             f"Hypocenter={data.get('Hypocenter')}, "
-            f"M={data.get('Magunitude')}, "
+            f"M={data.get('Magnitude')}, "
             f"MaxIntensity={data.get('MaxIntensity')}"
         )
 
